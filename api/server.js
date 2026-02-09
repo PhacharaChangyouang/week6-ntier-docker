@@ -2,48 +2,22 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const { Pool } = require('pg');
+const { Pool } = require('pg'); // ✅ มีแค่ครั้งเดียว
 
-// 1️⃣ สร้าง app ก่อน (สำคัญที่สุด)
+// 1️⃣ สร้าง app
 const app = express();
 
-// Database connection
-const { Pool } = require('pg');
-
+// 2️⃣ Database (Railway Postgres)
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: { rejectUnauthorized: false }
 });
 
-
-// 2️⃣ CORS configuration
-const corsOptions = {
-  origin: function (origin, callback) {
-    const allowedOrigins = [
-      'http://localhost:3000',
-      'http://localhost:8080',
-      'https://localhost',
-      /\.railway\.app$/
-    ];
-
-    if (!origin) return callback(null, true);
-
-    const isAllowed = allowedOrigins.some(allowed => {
-      if (allowed instanceof RegExp) return allowed.test(origin);
-      return allowed === origin;
-    });
-
-    // สำหรับ Lab อนุญาตหมด
-    callback(null, true);
-  },
-  credentials: true
-};
-
 // 3️⃣ Middleware
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
 
-// 4️⃣ Test route
+// 4️⃣ Health check
 app.get('/', (req, res) => {
   res.send('TaskBoard API is running 🚀');
 });
@@ -51,52 +25,58 @@ app.get('/', (req, res) => {
 // ============================================
 // Task API Routes
 // ============================================
+
+// GET tasks
 app.get('/api/tasks', async (req, res) => {
-    try {
-        const result = await pool.query('SELECT * FROM tasks');
-        res.json(result.rows);
-    } catch (err) {
-        console.error('Error fetching tasks:', err);
-        res.status(500).json({ error: err.message });
-    }
-});
-// POST: Add new task
-app.post('/api/tasks', async (req, res) => {
   try {
-    const { title } = req.body;
-    const result = await pool.query(
-      'INSERT INTO tasks (title, status, priority) VALUES ($1, $2, $3) RETURNING *',
-      [title, 'TODO', 'MEDIUM']
-    );
-    res.status(201).json(result.rows[0]);
+    const result = await pool.query('SELECT * FROM tasks ORDER BY id');
+    res.json(result.rows); // ⭐ ต้องเป็น array
   } catch (err) {
-    console.error('Error adding task:', err);
+    console.error(err);
     res.status(500).json({ error: err.message });
   }
 });
 
-// PUT: Update task status
+// POST task
+app.post('/api/tasks', async (req, res) => {
+  try {
+    const { title } = req.body;
+
+    const result = await pool.query(
+      `INSERT INTO tasks (title, status, priority)
+       VALUES ($1, 'TODO', 'MEDIUM')
+       RETURNING *`,
+      [title]
+    );
+
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// PUT update task status
 app.put('/api/tasks/:id', async (req, res) => {
   try {
     const { status } = req.body;
     const { id } = req.params;
 
     const result = await pool.query(
-      'UPDATE tasks SET status=$1, updated_at=NOW() WHERE id=$2 RETURNING *',
+      `UPDATE tasks SET status=$1, updated_at=NOW()
+       WHERE id=$2 RETURNING *`,
       [status, id]
     );
 
     res.json(result.rows[0]);
   } catch (err) {
-    console.error('Error updating task:', err);
+    console.error(err);
     res.status(500).json({ error: err.message });
   }
 });
 
-// 5️⃣ Port
+// 5️⃣ Start server
 const PORT = process.env.PORT || 3000;
-
-// 6️⃣ Start server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
