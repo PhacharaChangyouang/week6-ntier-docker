@@ -1,4 +1,3 @@
-// config.js
 const CONFIG = {
-    API_URL: 'https://independent-charm-production-ffa6.up.railway.app/api'
+  API_URL: 'https://week6-ntier-docker-production-fa5b.up.railway.app/api'
 };
