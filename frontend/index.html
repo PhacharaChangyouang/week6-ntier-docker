@@ -1,2 +1,35 @@
-<script src="config.js"></script>
-<script src="js/app.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Task Board</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+    <h1>📋 Task Board</h1>
+    <p>N-Tier Architecture on Railway Cloud</p>
+
+    <div class="board">
+        <div class="column">
+            <h2>TODO</h2>
+            <div id="todo"></div>
+        </div>
+
+        <div class="column">
+            <h2>IN PROGRESS</h2>
+            <div id="in-progress"></div>
+        </div>
+
+        <div class="column">
+            <h2>DONE</h2>
+            <div id="done"></div>
+        </div>
+    </div>
+
+    <!-- ต้องเรียงแบบนี้ -->
+    <script src="config.js"></script>
+    <script src="js/app.js"></script>
+
+</body>
+</html>
