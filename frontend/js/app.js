@@ -40,9 +40,12 @@ function renderTasks(tasks) {
     tasks.forEach(task => {
         const card = document.createElement('div');
         card.className = 'task';
+
         card.innerHTML = `
             <strong>${task.title}</strong><br/>
-            <small>${task.priority}</small>
+            <small>${task.priority}</small><br/><br/>
+            <button onclick="moveTask(${task.id}, 'IN_PROGRESS')">➡️</button>
+            <button onclick="moveTask(${task.id}, 'DONE')">✅</button>
         `;
 
         if (task.status === 'TODO') {
@@ -53,6 +56,25 @@ function renderTasks(tasks) {
             done.appendChild(card);
         }
     });
+}
+
+async function moveTask(id, status) {
+    await fetch(`${API_BASE}/tasks/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status })
+    });
+    loadTasks();
+}
+
+async function addTask() {
+    const title = document.getElementById('title').value;
+    await fetch(`${API_BASE}/tasks`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title })
+    });
+    loadTasks();
 }
 
 // ============================================
