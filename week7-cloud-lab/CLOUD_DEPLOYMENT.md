@@ -1,0 +1,132 @@
+# Cloud Deployment Analysis
+## ENGSE207 - Week 7 Lab
+
+**ชื่อ-นามสกุล:** พชร จันทร์ยวง
+**รหัสนักศึกษา:** 67543210039-3
+
+### 1.1 URLs ของระบบที่ Deploy
+
+| Service | URL |
+|---------|-----|
+| Frontend | https://independent-charm-production-ffa6.up.railway.app/ |
+| Backend API |https://week6-ntier-docker-production-fa5b.up.railway.app/api/tasks |
+| Database | (Internal - ไม่มี public URL) |
+
+### 1.2 Screenshot หลักฐาน (5 รูป)
+
+1. [ ] Railway Dashboard แสดง 3 Services
+
+2. [ ] Frontend ทำงานบน Browser
+
+3. [ ] API Health check response
+
+4. [ ] Logs แสดง requests
+
+5. [ ] Metrics แสดง CPU/Memory
+---
+
+## ส่วนที่ 2: เปรียบเทียบ Docker vs Cloud (15 คะแนน)
+
+### 2.1 ความแตกต่างที่สังเกตเห็น (10 คะแนน)
+
+| ด้าน | Docker (Week 6) | Railway (Week 7) |
+|------|-----------------|------------------|
+| เวลา Deploy | ต้อง build และ run เอง ใช้เวลานานกว่า | Deploy อัตโนมัติจาก Git เร็ว |
+| การตั้งค่า Network | ต้องตั้ง port และ network เอง | จัดการให้โดยอัตโนมัติ |
+| การจัดการ ENV | ใช้ไฟล์ `.env` ในเครื่อง | ตั้งค่าใน Variables tab |
+| การดู Logs | ดูผ่าน terminal | ดูได้จาก Dashboard |
+| การ Scale | ต้อง config เอง | รองรับการ scale ง่ายกว่า |
+
+---
+### 2.2 ข้อดี/ข้อเสีย ของแต่ละแบบ (5 คะแนน)
+
+**Docker Local:**
+- ข้อดี: ควบคุมระบบได้ทั้งหมดและเหมาะกับการพัฒนา
+- ข้อเสีย: ต้องตั้งค่าหลายอย่างและไม่สะดวกสำหรับ production
+
+**Railway Cloud:**
+- ข้อดี: Deployง่ายรวดเร็วและมีDashboardให้ดูLogs/Metrics
+- ข้อเสีย: ขึ้นกับCloud Providerและมีข้อจำกัดตามPlanและงบประมานในการใช้
+
+---
+## ส่วนที่ 3: Cloud Service Models (10 คะแนน)
+
+### 3.1 Railway เป็น Service Model แบบไหน?
+
+[ ] IaaS   [x] PaaS   [ ] SaaS  
+
+เพราะ: Railway จัดการ Infrastructure, Network และ Runtime ให้ ผู้พัฒนาโฟกัสที่โค้ดและการ deploy เท่านั้น
+
+---
+### 3.2 ถ้าใช้ IaaS (เช่น AWS EC2) ต้องทำอะไรเพิ่มอีก? (ยกตัวอย่าง 4 ข้อ)
+
+1. ตั้งค่าและดูแล Server (OS, Security)
+2. ติดตั้ง Runtime เช่น Node.js, Docker
+3. ตั้งค่า Network และ Firewall
+4. จัดการ Scaling และ Monitoring เอง
+
+---
+## ส่วนที่ 4: 12-Factor App Analysis (15 คะแนน)
+
+### 4.1 Factors ที่เห็นจาก Lab (10 คะแนน)
+
+| Factor | เห็นจากไหน? | ทำไมสำคัญ? |
+|--------|-------------|-------------|
+| Factor 3: Config | Variables tab | แยก config ออกจาก code ทำให้ปลอดภัย |
+| Factor 6: Processes | Railway service run | แอปรันแบบ stateless |
+| Factor 7: Port Binding | Railway auto expose port | รองรับ cloud-native |
+| Factor 10: Dev/Prod Parity | ใช้ environment ใกล้เคียงกัน | ลดปัญหาต่าง environment |
+| Factor 11: Logs | Logs tab | ช่วย debug และ monitor ระบบ |
+
+---
+
+### 4.2 ถ้าไม่ทำตาม 12-Factor จะมีปัญหาอะไร? (5 คะแนน)
+
+**ปัญหา 1:** ถ้าไม่ทำตาม Factor 3 (Config)  
+- สิ่งที่จะเกิด: ข้อมูลสำคัญอาจรั่ว และเปลี่ยน environment ยาก
+
+**ปัญหา 2:** ถ้าไม่ทำตาม Factor 11 (Logs)  
+- สิ่งที่จะเกิด: ตรวจสอบปัญหาใน production ได้ยาก
+
+---
+## ส่วนที่ 5: Reflection (10 คะแนน)
+
+### 5.1 สิ่งที่เรียนรู้จาก Lab นี้
+
+1. เข้าใจขั้นตอนการ deploy ระบบขึ้น Cloud
+2. เห็นความแตกต่างระหว่าง Docker local กับ PaaS
+3. เรียนรู้การใช้ Logs และ Metrics เพื่อ monitor ระบบ
+---
+
+### 5.2 ความท้าทาย/ปัญหาที่พบ และวิธีแก้ไข
+
+ปัญหา: การตั้งค่า environment และ path ของ frontend/backend  
+วิธีแก้: ตรวจสอบ config และใช้ Variables ใน Railway
+
+
+ปัญหา:
+
+การเชื่อมต่อระหว่าง Frontend และ Backend หลังจาก Deploy ขึ้น Railway ไม่ทำงานตามที่คาดไว้
+เช่น เรียก API แล้วขึ้น error (Cannot DELETE /api/tasks/:id, ECONNREFUSED) และ frontend ไม่สามารถลบหรืออัปเดตข้อมูลได้
+
+วิธีแก้:
+ตรวจสอบ path ของ API และ HTTP method ให้ตรงกันระหว่าง frontend และ backend
+รวมถึงตั้งค่า Base URL ของ API ผ่านไฟล์ config.js และ Variables ของ Railway
+หลังจากแก้ไข route และ redeploy ระบบใหม่ จึงสามารถเรียกใช้งาน API ได้ถูกต้อง
+
+ปัญหา:
+
+การจัดการไฟล์ CSS / SCSS ใน frontend มีความสับสน
+เช่น Sass compile error, ไฟล์ style.scss ไม่ถูกพบ และ VS Code แสดง error ตลอดเวลา
+
+วิธีแก้:
+แยกโครงสร้างโฟลเดอร์ให้ชัดเจน (css/style.scss → css/style.css)
+ใช้ npx sass แทนการติดตั้งแบบ global และตรวจสอบ path ที่อ้างอิงใน index.html
+เมื่อ compile สำเร็จและใช้ไฟล์ .css จริง error จึงหายไป
+
+---
+
+### 5.3 จะเลือกใช้ Docker หรือ Cloud เมื่อไหร่?
+
+- ใช้ Docker เมื่อ: พัฒนาและทดสอบระบบในเครื่อง
+- ใช้ Cloud (PaaS) เมื่อ: ต้อง deploy ให้ใช้งานจริงและดูแลระบบง่าย
