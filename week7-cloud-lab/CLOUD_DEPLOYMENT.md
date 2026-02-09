@@ -15,14 +15,20 @@
 ### 1.2 Screenshot หลักฐาน (5 รูป)
 
 1. [ ] Railway Dashboard แสดง 3 Services
+<img width="1920" height="1020" alt="Screenshot 2026-02-09 200533" src="https://github.com/user-attachments/assets/3a38ec0a-b3a5-4091-8435-4d96a2644e8a" />
 
 2. [ ] Frontend ทำงานบน Browser
+<img width="1920" height="1080" alt="Screenshot 2026-02-09 200412" src="https://github.com/user-attachments/assets/1f63c28d-89bb-44bf-9a5e-409148f47641" />
 
 3. [ ] API Health check response
+<img width="1920" height="1020" alt="Screenshot 2026-02-09 200443" src="https://github.com/user-attachments/assets/2188ad4a-fe74-43cb-9b92-edbca12fa3fb" />
 
 4. [ ] Logs แสดง requests
+<img width="1920" height="1020" alt="Screenshot 2026-02-09 212234" src="https://github.com/user-attachments/assets/c7d9482b-7d10-4929-8cab-3a401785bfd8" />
 
 5. [ ] Metrics แสดง CPU/Memory
+<img width="1920" height="1020" alt="Screenshot 2026-02-09 212854" src="https://github.com/user-attachments/assets/f7dd5f89-f23f-4027-9128-9e7eb21123b8" />
+
 ---
 
 ## ส่วนที่ 2: เปรียบเทียบ Docker vs Cloud (15 คะแนน)
