@@ -4,9 +4,7 @@
 // ============================================
 
 // ⚠️ เปลี่ยน URL นี้เป็น API URL ของคุณบน Railway
-const API_BASE = 'https://week6-ntier-docker-production-fa5b.up.railway.app/api';
-// ตัวอย่าง:
-// const API_BASE = 'https://taskboard-api-production-abc123.up.railway.app/api';
+const API_BASE = 'https://independent-charm-production-ffa6.up.railway.app/api';
 
 // ============================================
 // API Functions
