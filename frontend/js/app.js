@@ -4,8 +4,7 @@
 // ============================================
 
 // ⚠️ เปลี่ยน URL นี้เป็น API URL ของคุณบน Railway
-const API_BASE = 'https://independent-charm-production-ffa6.up.railway.app/api';
-
+const API_BASE = CONFIG.API_URL;
 // ============================================
 // API Functions
 // ============================================
