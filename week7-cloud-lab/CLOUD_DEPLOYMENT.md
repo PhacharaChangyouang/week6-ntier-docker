@@ -15,7 +15,8 @@
 ### 1.2 Screenshot หลักฐาน (5 รูป)
 
 1. [ ] Railway Dashboard แสดง 3 Services
-<img width="1920" height="846" alt="Screenshot 2026-02-09 212854" src="https://github.com/user-attachments/assets/10077ba7-5a87-4a53-8a94-c714846cc9b7" />
+<img width="1920" height="866" alt="3125" src="https://github.com/user-attachments/assets/12806095-5198-44b5-b79d-4104aff3ff4f" />
+
 
 2.[ ] Frontend ทำงานบน Browser
  <img width="1920" height="1080" alt="Screenshot 2026-02-09 200412" src="https://github.com/user-attachments/assets/c39aeb33-415c-436d-9edb-99e89f76609d" />
@@ -107,6 +108,13 @@
 
 ### 5.2 ความท้าทาย/ปัญหาที่พบ และวิธีแก้ไข
 
+ปัญหา: ต้แการปรับพื้นหลังให้น่าสนใจ น่าใช้แต่ไฟล์.scssที่ได้ไปหาาจากในเน็ตนั้นแก้erorr
+การใช้งาน Sass (SCSS) ใน frontend ไม่สามารถ compile เป็น CSS ได้ และ VS Code แสดง error ตลอด
+เช่น error expected ";", no such file or directory, และไฟล์ .scss ไม่ถูกพบตาม path ที่กำหนด
+รวมถึงไม่สามารถติดตั้ง sass แบบ global ได้เนื่องจากปัญหา permission (EACCES)
+วิธีแก้: ใช้ npx sass แทน global install และจัด path ไฟล์ SCSS → CSS ให้ถูกต้องก่อน deploy
+
+
 ปัญหา: การตั้งค่า environment และ path ของ frontend/backend  
 วิธีแก้: ตรวจสอบ config และใช้ Variables ใน Railway
 
@@ -121,15 +129,6 @@
 รวมถึงตั้งค่า Base URL ของ API ผ่านไฟล์ config.js และ Variables ของ Railway
 หลังจากแก้ไข route และ redeploy ระบบใหม่ จึงสามารถเรียกใช้งาน API ได้ถูกต้อง
 
-ปัญหา:
-
-การจัดการไฟล์ CSS / SCSS ใน frontend มีความสับสน
-เช่น Sass compile error, ไฟล์ style.scss ไม่ถูกพบ และ VS Code แสดง error ตลอดเวลา
-
-วิธีแก้:
-แยกโครงสร้างโฟลเดอร์ให้ชัดเจน (css/style.scss → css/style.css)
-ใช้ npx sass แทนการติดตั้งแบบ global และตรวจสอบ path ที่อ้างอิงใน index.html
-เมื่อ compile สำเร็จและใช้ไฟล์ .css จริง error จึงหายไป
 
 ---
 
