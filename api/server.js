@@ -9,11 +9,10 @@ const app = express();
 
 // Database connection
 const pool = new Pool({
-  user: process.env.DB_USER || 'user',
-  password: process.env.DB_PASSWORD || 'password',
-  host: process.env.DB_HOST || 'localhost',
-  port: process.env.DB_PORT || 5432,
-  database: process.env.DB_NAME || 'taskdb'
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 // 2️⃣ CORS configuration
