@@ -1,0 +1,10 @@
+app.get('/api/tasks', async (req, res) => {
+  try {
+    const result = await pool.query('SELECT * FROM tasks ORDER BY id');
+    console.log('TASKS:', result.rows);   // 🔍
+    res.json(result.rows);
+  } catch (err) {
+    console.error('DB ERROR:', err);      // 🔥
+    res.status(500).json({ error: err.message });
+  }
+});

@@ -37,6 +37,18 @@ function renderTasks(tasks) {
     progress.innerHTML = '';
     done.innerHTML = '';
 
+function renderTasks(tasks) {
+  if (!Array.isArray(tasks)) {
+    console.error('API did not return array:', tasks);
+    return;
+  }
+
+  tasks.forEach(task => {
+    // ...
+  });
+}
+
+
     tasks.forEach(task => {
         const card = document.createElement('div');
         card.className = 'task';
