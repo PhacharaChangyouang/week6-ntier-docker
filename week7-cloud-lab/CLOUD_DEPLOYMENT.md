@@ -23,6 +23,8 @@
 
 3. [ ] API Health check response
 <img width="1920" height="869" alt="Screenshot 2026-02-09 200443" src="https://github.com/user-attachments/assets/bf0cecad-f1c3-428a-b604-931967544519" />
+<img width="1915" height="727" alt="Screenshot 2026-02-09 220749" src="https://github.com/user-attachments/assets/d2bd4852-476d-40e9-875d-1d3ba54c8079" />
+
 
 4. [ ] Logs แสดง requests
 <img width="1920" height="869" alt="3123" src="https://github.com/user-attachments/assets/6971ea57-ce5a-48d5-bda9-1c63710c79c1" />
