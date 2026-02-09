@@ -15,19 +15,20 @@
 ### 1.2 Screenshot หลักฐาน (5 รูป)
 
 1. [ ] Railway Dashboard แสดง 3 Services
-<img width="1920" height="1020" alt="Screenshot 2026-02-09 200533" src="https://github.com/user-attachments/assets/3a38ec0a-b3a5-4091-8435-4d96a2644e8a" />
+<img width="1920" height="846" alt="Screenshot 2026-02-09 212854" src="https://github.com/user-attachments/assets/10077ba7-5a87-4a53-8a94-c714846cc9b7" />
 
-2. [ ] Frontend ทำงานบน Browser
-<img width="1920" height="1080" alt="Screenshot 2026-02-09 200412" src="https://github.com/user-attachments/assets/1f63c28d-89bb-44bf-9a5e-409148f47641" />
+2.[ ] Frontend ทำงานบน Browser
+ <img width="1920" height="1080" alt="Screenshot 2026-02-09 200412" src="https://github.com/user-attachments/assets/c39aeb33-415c-436d-9edb-99e89f76609d" />
 
 3. [ ] API Health check response
-<img width="1920" height="1020" alt="Screenshot 2026-02-09 200443" src="https://github.com/user-attachments/assets/2188ad4a-fe74-43cb-9b92-edbca12fa3fb" />
+<img width="1920" height="869" alt="Screenshot 2026-02-09 200443" src="https://github.com/user-attachments/assets/bf0cecad-f1c3-428a-b604-931967544519" />
 
 4. [ ] Logs แสดง requests
-<img width="1920" height="1020" alt="Screenshot 2026-02-09 212234" src="https://github.com/user-attachments/assets/c7d9482b-7d10-4929-8cab-3a401785bfd8" />
+<img width="1920" height="869" alt="3123" src="https://github.com/user-attachments/assets/6971ea57-ce5a-48d5-bda9-1c63710c79c1" />
+
 
 5. [ ] Metrics แสดง CPU/Memory
-<img width="1920" height="1020" alt="Screenshot 2026-02-09 212854" src="https://github.com/user-attachments/assets/f7dd5f89-f23f-4027-9128-9e7eb21123b8" />
+<img width="1920" height="852" alt="3121" src="https://github.com/user-attachments/assets/efd8a225-de1f-4f3d-82bb-aaeadf5cc30a" />
 
 ---
 
