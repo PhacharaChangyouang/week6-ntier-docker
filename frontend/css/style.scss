@@ -1,3 +1,5 @@
+$quantity: 15;
+
 html, body {
   height: 100%;
 }
@@ -33,7 +35,7 @@ body {
 
 .firefly::before,
 .firefly::after {
-  content: "";
+  content: '';
   position: absolute;
   width: 100%;
   height: 100%;
@@ -56,13 +58,10 @@ body {
 
 /* Animations */
 @keyframes drift {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
+
 @keyframes flash {
   0%, 30%, 100% {
     opacity: 0;
@@ -73,5 +72,3 @@ body {
     box-shadow: 0 0 2vw 0.4vw yellow;
   }
 }
-
-/*# sourceMappingURL=style.css.map */

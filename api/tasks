@@ -1,10 +1,17 @@
-app.get('/api/tasks', async (req, res) => {
+app.post('/api/tasks', async (req, res) => {
   try {
-    const result = await pool.query('SELECT * FROM tasks ORDER BY id');
-    console.log('TASKS:', result.rows);   // 🔍
-    res.json(result.rows);
+    const { title, description, status, priority } = req.body;
+
+    const result = await pool.query(
+      `INSERT INTO tasks (title, description, status, priority)
+       VALUES ($1, $2, $3, $4)
+       RETURNING *`,
+      [title, description, status, priority]
+    );
+
+    res.status(201).json(result.rows[0]);
   } catch (err) {
-    console.error('DB ERROR:', err);      // 🔥
+    console.error('POST ERROR:', err);
     res.status(500).json({ error: err.message });
   }
 });
