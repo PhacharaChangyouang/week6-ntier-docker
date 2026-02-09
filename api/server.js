@@ -2,9 +2,19 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const { Pool } = require('pg');
 
 // 1️⃣ สร้าง app ก่อน (สำคัญที่สุด)
 const app = express();
+
+// Database connection
+const pool = new Pool({
+  user: process.env.DB_USER || 'user',
+  password: process.env.DB_PASSWORD || 'password',
+  host: process.env.DB_HOST || 'localhost',
+  port: process.env.DB_PORT || 5432,
+  database: process.env.DB_NAME || 'taskdb'
+});
 
 // 2️⃣ CORS configuration
 const corsOptions = {
@@ -36,6 +46,19 @@ app.use(express.json());
 // 4️⃣ Test route
 app.get('/', (req, res) => {
   res.send('TaskBoard API is running 🚀');
+});
+
+// ============================================
+// Task API Routes
+// ============================================
+app.get('/api/tasks', async (req, res) => {
+    try {
+        const result = await pool.query('SELECT * FROM tasks');
+        res.json(result.rows);
+    } catch (err) {
+        console.error('Error fetching tasks:', err);
+        res.status(500).json({ error: err.message });
+    }
 });
 
 // 5️⃣ Port
