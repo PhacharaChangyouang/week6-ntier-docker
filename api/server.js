@@ -1,33 +1,47 @@
-// server.js - ส่วน CORS (เพิ่ม/แก้ไข)
+// server.js
+require('dotenv').config();
+const express = require('express');
 const cors = require('cors');
 
-// CORS configuration - รองรับทั้ง Local และ Railway
+// 1️⃣ สร้าง app ก่อน (สำคัญที่สุด)
+const app = express();
+
+// 2️⃣ CORS configuration
 const corsOptions = {
-    origin: function (origin, callback) {
-        // อนุญาต requests ที่ไม่มี origin (เช่น mobile apps, curl)
-        // และ origins ที่อนุญาต
-        const allowedOrigins = [
-            'http://localhost:3000',
-            'http://localhost:8080',
-            'https://localhost',
-            /\.railway\.app$/  // อนุญาตทุก subdomain ของ railway.app
-        ];
-        
-        if (!origin) return callback(null, true);
-        
-        const isAllowed = allowedOrigins.some(allowed => {
-            if (allowed instanceof RegExp) return allowed.test(origin);
-            return allowed === origin;
-        });
-        
-        if (isAllowed) {
-            callback(null, true);
-        } else {
-            console.log('CORS blocked:', origin);
-            callback(null, true); // อนุญาตทุก origin สำหรับ Lab
-        }
-    },
-    credentials: true
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      'http://localhost:3000',
+      'http://localhost:8080',
+      'https://localhost',
+      /\.railway\.app$/
+    ];
+
+    if (!origin) return callback(null, true);
+
+    const isAllowed = allowedOrigins.some(allowed => {
+      if (allowed instanceof RegExp) return allowed.test(origin);
+      return allowed === origin;
+    });
+
+    // สำหรับ Lab อนุญาตหมด
+    callback(null, true);
+  },
+  credentials: true
 };
 
+// 3️⃣ Middleware
 app.use(cors(corsOptions));
+app.use(express.json());
+
+// 4️⃣ Test route
+app.get('/', (req, res) => {
+  res.send('TaskBoard API is running 🚀');
+});
+
+// 5️⃣ Port
+const PORT = process.env.PORT || 3000;
+
+// 6️⃣ Start server
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
